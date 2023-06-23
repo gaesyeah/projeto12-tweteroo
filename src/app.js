@@ -15,6 +15,13 @@ app.post('/sign-up', (req, res) => {
 
     if (!users.find(user => user.username === username)){
         users.push({username, avatar});
+    } else {
+        //para mudar a foto de perfil caso um usuario ja cadastrado entre de novo com outra foto
+        users.forEach(user => {
+            if (user.username === username){
+                user.avatar = avatar;
+            }
+        })
     }
     res.send('OK');
 });
