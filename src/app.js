@@ -36,17 +36,17 @@ app.post('/tweets', (req, res) => {
 })
 
 app.get('/tweets', (req, res) => {
-    const last10tweets = [...tweetsList];
+    const resTweets = [...tweetsList];
     
-    for(let i = 0; i < last10tweets.length; i++){
-        last10tweets[i].avatar = users.find(user => user.username === last10tweets[i].username).avatar;
+    for(let i = 0; i < resTweets.length; i++){
+        resTweets[i].avatar = users.find(user => user.username === resTweets[i].username).avatar;
 
-        if (last10tweets.length > 10){
-            last10tweets.shift();
+        if (resTweets.length > 10){
+            resTweets.shift();
         }
     }
         
-    res.send(last10tweets.reverse());
+    res.send(resTweets.reverse());
 })
 
 app.listen(PORT, () => console.log(`O servidor está rodando na porta ${PORT}`));
