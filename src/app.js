@@ -38,13 +38,14 @@ app.post('/tweets', (req, res) => {
 app.get('/tweets', (req, res) => {
     const last10tweets = [...tweetsList];
     
-        last10tweets.forEach(tweet => {
-            tweet.avatar = users.find(user => user.username === tweet.username).avatar;
-        });
-        
+    for(let i = 0; i < last10tweets.length; i++){
+        last10tweets[i].avatar = users.find(user => user.username === last10tweets[i].username).avatar;
+
         if (last10tweets.length > 10){
             last10tweets.shift();
         }
+    }
+        
     res.send(last10tweets.reverse());
 })
 
